@@ -6,7 +6,7 @@ module.exports = {
 		const pricePerKg = 8.67;
 
 		browser
-			.url('http://localhost:3007/api/delete-test-cuts') //https://service-b2b-market-staging.herokuapp.com/api/delete-test-cuts
+			.url('https://service-b2b-market-staging.herokuapp.com/api/delete-test-cuts')
 			.url(browser.launch_url)
 			.setCookie({name: 'user', value: 'test'})
 			.url(browser.launch_url)
@@ -26,8 +26,10 @@ module.exports = {
 			.click(`.t-submit`)
 			.waitForElementVisible('body', 1000)
 			.click('.t-marketplace-link')
-			.waitForElementVisible('body', 1000)
+			.url('https://app-b2b-marketplace-staging.herokuapp.com/marketplace')
 			.setCookie({name: 'user', value: 'test'})
+			.url('https://app-b2b-marketplace-staging.herokuapp.com/marketplace')
+			.waitForElementVisible('body', 1000)
 			.log(`The published cow is visible in the marketplace in '${farmId}'`)
 			.click('.t-checkbox-provenance-organic')
 			.click('.t-checkbox-provenance-grassFed')
