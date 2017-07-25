@@ -28,7 +28,7 @@ module.exports = {
 			.click('.t-marketplace-link')
 			.waitForElementVisible('body', 1000)
 			.setCookie({name: 'user', value: 'test'})
-			.deleteCookie({name: 'basketId'})
+			.deleteCookie('basketId')
 			.url('https://app-b2b-marketplace-staging.herokuapp.com/marketplace')
 			.waitForElementVisible('body', 1000)
 			.log(`The published cow is visible in the marketplace in '${farmId}'`)
