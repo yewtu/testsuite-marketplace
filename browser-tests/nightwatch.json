@@ -1,0 +1,27 @@
+{
+	"src_folders": [
+		"./browser-tests/tests"
+	],
+	"custom_commands_path": "./browser-tests/commands",
+	"custom_assertions_path": "",
+	"page_objects_path": "",
+	"output_folder" : "./browser-tests/output",
+	"globals_path": "./browser-tests/helpers/external-globals.js",
+	"selenium": {
+		"start_process": false
+	},
+	"test_settings": {
+		"default": {
+			"selenium_port": 9515,
+			"selenium_host": "localhost",
+			"default_path_prefix": "",
+			"desiredCapabilities": {
+				"browserName": "chrome"
+			},
+			"launch_url" : "http://localhost:3005/publish?test=1"
+		},
+		"staging": {
+			"launch_url" : "https://app-cow-publisher-staging.herokuapp.com/publish?test=1"
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "testsuite-marketplace",
+	"version": "1.0.0",
+	"engines": {
+		"node": "8.1.4",
+		"yarn": "^0.27.5"
+	},
+	"repository": "git@github.com:yewtu/testsuite-marketplace.git",
+	"author": "Jon Wyatt <jonnywyatt@yahoo.co.uk>",
+	"license": "MIT",
+	"scripts": {
+		"test": "yarn test:browser:staging",
+		"test:browser": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json",
+		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json --env staging"
+	},
+	"devDependencies": {
+		"chai": "^4.1.0",
+		"chromedriver": "^2.30.1",
+		"mocha": "^3.4.2",
+		"nightwatch": "^0.9.16"
+	}
+}
