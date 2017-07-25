@@ -26,7 +26,6 @@ module.exports = {
 			.click(`.t-submit`)
 			.waitForElementVisible('body', 1000)
 			.click('.t-marketplace-link')
-			.url('https://app-b2b-marketplace-staging.herokuapp.com/marketplace')
 			.setCookie({name: 'user', value: 'test'})
 			.url('https://app-b2b-marketplace-staging.herokuapp.com/marketplace')
 			.waitForElementVisible('body', 1000)
