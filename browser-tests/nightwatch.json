@@ -16,7 +16,10 @@
 			"selenium_host": "localhost",
 			"default_path_prefix": "",
 			"desiredCapabilities": {
-				"browserName": "chrome"
+				"browserName": "chrome",
+				"chromeOptions": {
+					"args": ["headless"]
+				}
 			},
 			"launch_url" : "http://localhost:3005/publish?test=1"
 		},
