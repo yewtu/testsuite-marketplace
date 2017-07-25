@@ -11,7 +11,7 @@
 	"scripts": {
 		"test": "yarn test:browser:staging",
 		"test:browser": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json",
-		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json --env staging"
+		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json --env ci-server"
 	},
 	"dependencies": {
 		"chai": "^4.1.0",
