@@ -14,8 +14,10 @@
 		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json --env staging"
 	},
 	"dependencies": {
+		"axios": "^0.16.2",
 		"chai": "^4.1.0",
 		"chromedriver": "^2.30.1",
+		"express": "^4.15.3",
 		"mocha": "^3.4.2",
 		"nightwatch": "^0.9.16"
 	}
