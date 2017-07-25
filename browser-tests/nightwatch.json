@@ -23,7 +23,7 @@
 			},
 			"launch_url" : "http://localhost:3005/publish?test=1"
 		},
-		"ci-server": {
+		"staging": {
 			"launch_url" : "https://app-cow-publisher-staging.herokuapp.com/publish?test=1"
 		}
 	}
