@@ -3,3 +3,7 @@ dist: trusty
 cache: yarn
 addons:
   chrome: stable
+notifications:
+  slack: 'yewtu:3HQH6L397zj0IMuNacKrU619'
+  on_success: change
+  on_failure: always
