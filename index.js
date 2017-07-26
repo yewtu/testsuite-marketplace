@@ -9,11 +9,11 @@ app.post('/heroku-postdeploy', function (req, res) {
 	const message = `App: ${req.body.app}, Commit: ${req.body.head} - ${req.body.git_log}`;
 	axios({
 		url: 'https://api.travis-ci.org/repo/yewtu%2Ftestsuite-marketplace/requests',
-		message,
 		method: 'post',
 		data: {
 			request: {
-				branch: "master"
+				branch: "master",
+				message
 			}
 		},
 		headers: {
