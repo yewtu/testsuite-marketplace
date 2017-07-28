@@ -16,15 +16,20 @@
 			"selenium_host": "localhost",
 			"default_path_prefix": "",
 			"desiredCapabilities": {
-				"browserName": "chrome",
-				"chromeOptions": {
-					"args": ["headless"]
-				}
+				"browserName": "chrome"
 			},
-			"launch_url" : "http://localhost:3005/publish?test=1"
+			"launch_url" : "http://localhost:3005/publish?test=1",
+			"globals": {
+				"url_delete_test_cuts": "http://localhost:3007/api/delete-test-cuts",
+				"url_marketplace": "http://localhost:3006/marketplace"
+			}
 		},
 		"staging": {
-			"launch_url" : "https://app-cow-publisher-staging.herokuapp.com/publish?test=1"
+			"launch_url" : "https://app-cow-publisher-staging.herokuapp.com/publish?test=1",
+			"globals": {
+				"url_delete_test_cuts": "https://service-b2b-market-staging.herokuapp.com/api/delete-test-cuts",
+				"url_marketplace": "https://app-b2b-marketplace-staging.herokuapp.com/marketplace"
+			}
 		}
 	}
 }
