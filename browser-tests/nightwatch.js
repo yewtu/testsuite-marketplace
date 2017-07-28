@@ -1,4 +1,4 @@
-{
+module.exports = {
   "src_folders": [
     "./browser-tests/tests"
   ],
@@ -28,8 +28,8 @@
     "staging": {
       "selenium_host": "ondemand.saucelabs.com",
       "silent": true,
-      "username": "jw-yewtu",
-      "access_key": "789f312e-6579-4986-9201-28eeb5a531df",
+      "username": process.env.SAUCE_USERNAME,
+      "access_key": process.env.SAUCE_ACCESS_KEY,
       "selenium_port": 80,
       "launch_url": "http://ondemand.saucelabs.com:80",
       "globals": {
@@ -38,6 +38,8 @@
         "url_marketplace": "https://app-b2b-marketplace-staging.herokuapp.com/marketplace"
       },
       "desiredCapabilities": {
+				"build": `build-${process.env.TRAVIS_JOB_NUMBER}`,
+				"tunnel-identifier": process.env.TRAVIS_JOB_NUMBER,
         "browserName": "chrome",
         "chromeOptions": {
           "args": [
