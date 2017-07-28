@@ -40,6 +40,7 @@ module.exports = {
 			.click('.t-checkbox-provenance-grassFed')
 			.click('.t-checkbox-provenance-hormoneFree')
 			.click('.t-checkbox-provenance-redTractor')
+			.assert.elementPresent(`.t-search-result-row-${farmId}`)
 			.getText(`.t-${farmId}-inventory`, function (result) {
 				this.assert.equal(parseInt(result.value, 10), 1);
 			})
@@ -72,6 +73,11 @@ module.exports = {
 			.getText(`.t-order-total`, function (result) {
 				this.assert.equal(result.value, basketTotal);
 			})
+
+			.log(`Cow is no longer available in the marketplace`)
+			.url(browser.globals.url_marketplace)
+			.waitForElementVisible('body', 1000)
+			.assert.elementNotPresent(`.t-search-result-row-${farmId}`)
 			.end();
 	}
 };
