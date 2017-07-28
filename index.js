@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/heroku-postdeploy', function (req, res) {
-	const message = `${req.body.app} - ${req.body.user} - ${req.body.head}`;
+	const message = `${req.body.app} - ${req.body.head}`;
 	axios({
 		url: 'https://api.travis-ci.org/repo/yewtu%2Ftestsuite-marketplace/requests',
 		method: 'post',
