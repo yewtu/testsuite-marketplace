@@ -1,9 +1,8 @@
 language: node_js
 dist: trusty
 cache: yarn
-sauce_connect:
-    username: "jw-yewtu"
-    access_key: "789f312e-6579-4986-9201-28eeb5a531df"
+addons:
+  sauce_connect: true
 notifications:
   slack: "yewtu:3HQH6L397zj0IMuNacKrU619"
   on_success: change

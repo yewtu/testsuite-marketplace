@@ -28,8 +28,8 @@ module.exports = {
     "staging": {
       "selenium_host": "ondemand.saucelabs.com",
       "silent": true,
-      "username": process.env.SAUCE_USERNAME,
-      "access_key": process.env.SAUCE_ACCESS_KEY,
+      "username": "jw-yewtu",
+      "access_key": "789f312e-6579-4986-9201-28eeb5a531df",
       "selenium_port": 80,
       "launch_url": "http://ondemand.saucelabs.com:80",
       "globals": {
