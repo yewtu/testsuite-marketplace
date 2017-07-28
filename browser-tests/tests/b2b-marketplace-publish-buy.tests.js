@@ -8,7 +8,9 @@ module.exports = {
 		const eidTag = '123';
 
 		browser
-			.url(browser.globals.url_delete_test_cuts)
+			.getJSON(browser.globals.url_delete_test_cuts, function(response) {
+				console.log(`${response.deletedCount} documents deleted for test user`)
+			})
 			.url(browser.launch_url)
 			.setCookie({name: 'user', value: 'test'})
 			.url(browser.launch_url)
