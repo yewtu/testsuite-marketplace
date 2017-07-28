@@ -10,9 +10,9 @@
 	"license": "MIT",
 	"scripts": {
 		"test": "yarn test:browser:staging",
-		"test:browser": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json",
+		"test:browser": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.js",
 		"pretest:browser": "pm2 start ./node_modules/module-shared-code/pm2/pm2-marketplace.config.js",
-		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.json --env staging"
+		"test:browser:staging": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.js --env staging"
 	},
 	"dependencies": {
 		"axios": "^0.16.2",

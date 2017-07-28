@@ -8,12 +8,13 @@ module.exports = {
 		const eidTag = '123';
 
 		browser
+			.url(browser.launch_url)
 			.getJSON(browser.globals.url_delete_test_cuts, function(response) {
 				console.log(`${response.deletedCount} documents deleted for test user`)
 			})
-			.url(browser.launch_url)
+			.url(browser.url_publish)
 			.setCookie({name: 'user', value: 'test'})
-			.url(browser.launch_url)
+			.url(browser.url_publish)
 			.waitForElementVisible('body', 1000)
 
 			.log(`Publish cow`)
