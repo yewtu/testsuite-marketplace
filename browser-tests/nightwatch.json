@@ -16,10 +16,7 @@
 			"selenium_host": "localhost",
 			"default_path_prefix": "",
 			"desiredCapabilities": {
-				"browserName": "chrome",
-				"chromeOptions": {
-					"args": ["headless"]
-				}
+				"browserName": "chrome"
 			},
 			"launch_url" : "http://localhost:3005/publish?test=1",
 			"globals": {
@@ -32,6 +29,12 @@
 			"globals": {
 				"url_delete_test_cuts": "https://service-b2b-market-staging.herokuapp.com/api/delete-test-cuts",
 				"url_marketplace": "https://app-b2b-marketplace-staging.herokuapp.com/marketplace"
+			},
+			"desiredCapabilities": {
+				"browserName": "chrome",
+				"chromeOptions": {
+					"args": ["headless"]
+				}
 			}
 		}
 	}
