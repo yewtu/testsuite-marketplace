@@ -3,6 +3,8 @@ dist: trusty
 cache: yarn
 addons:
   chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9515 http://localhost
 notifications:
   slack: 'yewtu:3HQH6L397zj0IMuNacKrU619'
   on_success: change
