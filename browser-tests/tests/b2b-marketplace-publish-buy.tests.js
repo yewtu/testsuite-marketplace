@@ -4,6 +4,8 @@ module.exports = {
 		const breedId = 'dexter';
 		const liveWeight = 300;
 		const pricePerKg = 8.67;
+		const basketTotal = '£689.27';
+		const eidTag = '123';
 
 		browser
 			.url(browser.globals.url_delete_test_cuts)
@@ -15,7 +17,7 @@ module.exports = {
 			.log(`Publish cow`)
 			.setVal('[name="farm"]', farmId)
 			.setVal('[name="breed"]', breedId)
-			.setVal('[name="eidTag"]', '123')
+			.setVal('[name="eidTag"]', eidTag)
 			.setVal('[name="liveWeightKg"]', liveWeight)
 			.setVal('[name="reservePricePoundsPerKg"]', pricePerKg)
 			.setVal('[name="processingDate"]', '01-09-2017')
@@ -42,6 +44,8 @@ module.exports = {
 			.getText(`.t-${farmId}-price`, function (result) {
 				this.assert.equal(result.value, `£${pricePerKg}`);
 			})
+
+			.log(`Add the published cow to basket`)
 			.setVal(`.t-${farmId}-quantity`, '1')
 			.click(`.t-submit-${farmId}`)
 			.waitForElementVisible('.header__basket-count', 1000)
@@ -49,8 +53,22 @@ module.exports = {
 				this.assert.equal(parseInt(result.value, 10), 1);
 			})
 			.click('.t-basket-summary-link')
-			.getText(`.t-basket-total`, function (result) {
-				this.assert.equal(result.value,'£689.27');
+			.getText('.t-basket-total', function (result) {
+				this.assert.equal(result.value, basketTotal);
+			})
+
+			.log(`Go to checkout`)
+			.click('.t-btn-checkout')
+			.waitForElementVisible('.t-confirm-basket', 1000)
+			.getText('.t-confirm-basket .t-basket-total', function (result) {
+				this.assert.equal(result.value, basketTotal);
+			})
+
+			.log(`Confirm order`)
+			.click('.t-btn-confirm-order')
+			.waitForElementVisible('.t-order-confirmed', 1000)
+			.getText(`.t-order-total`, function (result) {
+				this.assert.equal(result.value, basketTotal);
 			})
 			.end();
 	}
