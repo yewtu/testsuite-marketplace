@@ -30,12 +30,15 @@ module.exports = {
 			.click('.t-checkbox-redTractor-1')
 			.click(`.t-submit`)
 			.waitForElementVisible('body', 1000)
+
+			.log('Go to Marketplace')
 			.click('.t-marketplace-link')
 			.waitForElementVisible('body', 1000)
 			.setCookie({name: 'user', value: testUser})
 			.deleteCookie('basketId')
 			.url(browser.globals.url_marketplace)
 			.waitForElementVisible('body', 1000)
+
 			.log(`The published cow is visible in the marketplace in '${farmId}'`)
 			.click('.t-checkbox-provenance-organic')
 			.click('.t-checkbox-provenance-grassFed')
