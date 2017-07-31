@@ -1,6 +1,6 @@
 module.exports = {
 	'B2B marketplace flow - publish cow, buy from marketplace': function (browser) {
-		const farmId = 'two-pines-farm';
+		const farmId = 'test-farm';
 		const breedId = 'dexter';
 		const liveWeight = 300;
 		const pricePerKg = 8.67;
@@ -16,7 +16,6 @@ module.exports = {
 			.setCookie({name: 'user', value: testUserCookie})
 			.url(browser.globals.url_publish)
 			.waitForElementVisible('.js-app', 1000)
-
 			.log(`Publish cow`)
 			.setVal('[name="farm"]', farmId)
 			.setVal('[name="breed"]', breedId)

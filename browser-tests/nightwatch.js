@@ -21,7 +21,7 @@ module.exports = {
 			"launch_url": "http://localhost:3005/publish?test=1",
 			"globals": {
 				"url_publish": "http://localhost:3005/publish?test=1",
-				"url_delete_test_cuts": "http://localhost:3007/api/delete-test-cuts",
+				"url_delete_test_cuts": "http://test:pw@localhost:3007/api/delete-test-cuts",
 				"url_marketplace": "http://localhost:3006/marketplace"
 			}
 		},
@@ -34,7 +34,7 @@ module.exports = {
 			"launch_url": "http://ondemand.saucelabs.com:80",
 			"globals": {
 				"url_publish": "https://app-cow-publisher-staging.herokuapp.com/publish",
-				"url_delete_test_cuts": "https://service-b2b-market-staging.herokuapp.com/api/delete-test-cuts",
+				"url_delete_test_cuts": "https://test:pw@service-b2b-market-staging.herokuapp.com/api/delete-test-cuts",
 				"url_marketplace": "https://app-b2b-marketplace-staging.herokuapp.com/marketplace"
 			},
 			"desiredCapabilities": {
