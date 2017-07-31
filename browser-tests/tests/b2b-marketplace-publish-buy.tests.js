@@ -6,13 +6,14 @@ module.exports = {
 		const pricePerKg = 8.67;
 		const basketTotal = '£689.27';
 		const eidTag = '123';
+		const testUser = 'test';
 
 		browser
 			.getJSON(browser.globals.url_delete_test_cuts, function(response) {
 				console.log(`${response.deletedCount} documents deleted for test user`)
 			})
 			.url(browser.globals.url_publish)
-			.setCookie({name: 'user', value: 'test'})
+			.setCookie({name: 'user', value: testUser})
 			.url(browser.globals.url_publish)
 			.waitForElementVisible('.js-app', 1000)
 
@@ -31,7 +32,7 @@ module.exports = {
 			.waitForElementVisible('body', 1000)
 			.click('.t-marketplace-link')
 			.waitForElementVisible('body', 1000)
-			.setCookie({name: 'user', value: 'test'})
+			.setCookie({name: 'user', value: testUser})
 			.deleteCookie('basketId')
 			.url(browser.globals.url_marketplace)
 			.waitForElementVisible('body', 1000)
