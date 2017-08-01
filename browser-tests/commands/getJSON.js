@@ -1,5 +1,5 @@
-var util = require('util');
-var events = require('events');
+const util = require('util');
+const events = require('events');
 
 function getJSON() {
 	events.EventEmitter.call(this);
@@ -8,8 +8,8 @@ function getJSON() {
 util.inherits(getJSON, events.EventEmitter);
 
 getJSON.prototype.command = function(path, cb) {
-	var self = this;
-	var request = require("request");
+	const self = this;
+	const request = require("request");
 	if (!path) {
 		return this;
 	}
