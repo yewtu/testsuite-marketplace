@@ -11,7 +11,7 @@
 	"scripts": {
 		"test": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.js --env chrome",
 		"test:local": "./node_modules/.bin/nightwatch --config browser-tests/nightwatch.js --env local",
-		"pretest:local": "pm2 start ./node_modules/module-shared-code/pm2/pm2-marketplace.config.js"
+		"pretest:local": "pm2 start ./pm2.config.js"
 	},
 	"dependencies": {
 		"axios": "^0.16.2",

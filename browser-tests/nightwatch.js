@@ -21,8 +21,7 @@ module.exports = {
 			"launch_url": "http://localhost:3005/publish?test=1",
 			"globals": {
 				"url_publish": "http://localhost:3005/publish?test=1",
-				"url_delete_test_cuts": "http://test:pw@localhost:3007/api/delete-test-cuts",
-				"url_marketplace": "http://localhost:3006/marketplace"
+				"url_delete_test_cuts": "http://test:pw@localhost:3007/api/delete-test-cuts"
 			}
 		},
 		"default": {
@@ -33,9 +32,8 @@ module.exports = {
 			"selenium_port": 80,
 			"launch_url": "http://ondemand.saucelabs.com:80",
 			"globals": {
-				"url_publish": "https://app-cow-publisher-staging.herokuapp.com/publish",
-				"url_delete_test_cuts": "https://test:pw@service-b2b-market-staging.herokuapp.com/api/delete-test-cuts",
-				"url_marketplace": "https://app-b2b-marketplace-staging.herokuapp.com/marketplace"
+				"url_publish": "https://app-cow-publisher-test.herokuapp.com/publish",
+				"url_delete_test_cuts": "https://test:pw@service-b2b-market-test.herokuapp.com/api/delete-test-cuts"
 			},
 			"desiredCapabilities": {
 				"build": `build-${process.env.TRAVIS_JOB_NUMBER}`,

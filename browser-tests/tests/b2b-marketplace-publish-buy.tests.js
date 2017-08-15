@@ -2,15 +2,26 @@ module.exports = {
 	'B2B marketplace flow - publish cow, buy from marketplace': function (browser) {
 		const farmId = 'test-farm';
 		const breedId = 'dexter';
-		const liveWeight = 300;
+		const liveWeightKg = 300;
 		const pricePerKg = 8.67;
 		const basketTotal = '£689.27';
 		const eidTag = '123';
 		const testUser = 'test';
-		const testUserCookie = JSON.stringify({userName: testUser});
+		let orderId = '';
+
+		let inventory;
+		let price;
+		const quantityToBuy = 2;
+		const product = 'blade';
+		const weightG = 300;
+		const selectorSuffix = `${product}-${farmId}-${breedId}-${weightG}`;
+		const selectors = {
+			inventory: `.t-sku-${selectorSuffix} .t-product-inventory`,
+			price: `.t-sku-${selectorSuffix} .t-product-price`
+		};
 
 		browser
-			.getJSON(browser.globals.url_delete_test_cuts, function(response) {
+			.getJSON(browser.globals.url_delete_test_cuts, function (response) {
 				console.log(`${response.deletedCount} documents deleted for test user`)
 			})
 			.url(browser.globals.url_publish)
@@ -24,7 +35,7 @@ module.exports = {
 			.setVal('[name="farm"]', farmId)
 			.setVal('[name="breed"]', breedId)
 			.setVal('[name="eidTag"]', eidTag)
-			.setVal('[name="liveWeightKg"]', liveWeight)
+			.setVal('[name="liveWeightKg"]', liveWeightKg)
 			.setVal('[name="reservePricePoundsPerKg"]', pricePerKg)
 			.setVal('[name="processingDate"]', '01-09-2017')
 			.click('.t-checkbox-organic-1')
@@ -38,7 +49,7 @@ module.exports = {
 			.click('.t-marketplace-link')
 			.waitForElementVisible('.js-app', 1000)
 			.deleteCookie('user')
-			.url(browser.globals.url_marketplace)
+			.click('.t-marketplace-home')
 			.waitForElementVisible('body', 1000)
 			.assert.elementNotPresent(`.t-search-result-row-${farmId}`)
 			.login(testUser)
@@ -82,11 +93,82 @@ module.exports = {
 			.getText(`.t-order-total`, function (result) {
 				this.assert.equal(result.value, basketTotal);
 			})
+			.getText(`.t-order-id`, function (result) {
+				orderId = result.value;
+			})
 
 			.log(`Cow is no longer available in the marketplace`)
-			.url(browser.globals.url_marketplace)
+			.click('.t-marketplace-home')
 			.waitForElementVisible('body', 1000)
 			.assert.elementNotPresent(`.t-search-result-row-${farmId}`)
+
+			.log('Go to B2C admin')
+			.back()
+			.waitForElementVisible('.js-app', 1000)
+			.click('.t-marketplace-admin-link')
+			.waitForElementVisible('.js-app', 1000)
+			.login(testUser)
+			.perform(function (client, done) {
+				client.click(`.t-order-${orderId}`);
+				done();
+			})
+			.waitForElementVisible('.t-order-line-items', 1000)
+			.perform(function (client, done) {
+				client.click(`.t-order-${orderId}-item-0`);
+				done();
+			})
+			.perform(function (client, done) {
+				client.waitForElementVisible(`.t-order-${orderId}-total`, 1000);
+				done();
+			})
+			.click('.t-publish-cuts')
+			.waitForElementVisible('.t-link-shop', 10000)
+
+			.log('Go to B2C shop')
+			.click('.t-link-shop')
+
+			.log(`Navigate to ${product} product page`)
+			.click(`.t-product-${product}`)
+			.waitForElementVisible(`.t-product-page-${product}`, 1000)
+
+			.getText(selectors.inventory, function (result) {
+				inventory = parseInt(result.value, 10);
+				this.log(`Inventory for ${product} (${weightG}g) is ${inventory}`)
+			})
+
+			.getText(selectors.price, function (result) {
+				price = parseFloat(result.value.substr(1));
+				this.log(`Price for ${product} (${weightG}g) is ${price}`)
+			})
+
+			.log(`Add ${quantityToBuy} ${product} items to basket`)
+			.setVal(`#${selectorSuffix}`, quantityToBuy)
+			.click(`.t-submit-${selectorSuffix}`)
+
+			.log(`The basket count for ${product} (${weightG}g) increases to ${quantityToBuy}`)
+			.waitForElementVisible('.header__basket__count', 5000)
+			.getText('.header__basket__count', function (result) {
+				this.assert.equal(parseInt(result.value, 10), quantityToBuy);
+			})
+
+			.getText(selectors.inventory, function (result) {
+				this.log(`The inventory level for ${product} (${weightG}g) decreases to ${inventory - quantityToBuy}`);
+				this.assert.equal(parseInt(result.value, 10), inventory - quantityToBuy);
+			})
+
+			.log('Navigate to basket summary')
+			.click('.t-basket-summary-link')
+			.waitForElementVisible('.t-basket-summary', 1000)
+
+			.log(`The basket count for ${product} (${weightG}g) shows ${quantityToBuy} items`)
+			.getValue(`#${selectorSuffix}`, function (result) {
+				this.assert.equal(parseInt(result.value, 10), quantityToBuy);
+			})
+
+			.getText('.t-basket-total', function (result) {
+				this.log(`The total basket value shows £${price} x ${quantityToBuy} = £${price * quantityToBuy}`)
+				this.assert.equal(parseFloat(result.value.substr(1)), price * quantityToBuy);
+			})
 			.end();
 	}
 };
