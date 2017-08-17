@@ -7,8 +7,9 @@ module.exports = {
 			watch: true,
 			node_args: ["--harmony"],
 			env: {
-				"SERVICE_ENV": "test",
-				"NODE_ENV": "development"
+				"SERVICE_ENV": "local",
+				"NODE_ENV": "development",
+				"MONGODB_URI": "mongodb://localhost:27017/b2b-marketplace-test"
 			}
 		},
 		{
@@ -17,7 +18,7 @@ module.exports = {
 			cwd: "../app-cow-publisher",
 			watch: true,
 			env: {
-				"SERVICE_ENV": "test",
+				"SERVICE_ENV": "local",
 				"NODE_ENV": "development"
 			}
 		},
@@ -27,7 +28,7 @@ module.exports = {
 			watch: true,
 			cwd: "../app-b2b-marketplace",
 			env: {
-				"SERVICE_ENV": "test",
+				"SERVICE_ENV": "local",
 				"NODE_ENV": "development"
 			}
 		},
@@ -38,7 +39,7 @@ module.exports = {
 			watch: true,
 			node_args: ["--harmony"],
 			env: {
-				"SERVICE_ENV": "test",
+				"SERVICE_ENV": "local",
 				"NODE_ENV": "development",
 				"STRIPE_API_KEY": "sk_test_uWKuYyQbCdyXXiR5G94v9Ogf"
 			}
@@ -49,7 +50,7 @@ module.exports = {
 			cwd: "../app-b2c-store",
 			watch: true,
 			env: {
-				"SERVICE_ENV": "test",
+				"SERVICE_ENV": "local",
 				"NODE_ENV": "development"
 			}
 		},
@@ -59,7 +60,7 @@ module.exports = {
 			cwd: "../app-b2c-shopfront",
 			watch: true,
 			env: {
-				"SERVICE_ENV": "test",
+				"SERVICE_ENV": "local",
 				"NODE_ENV": "development"
 			}
 		}
