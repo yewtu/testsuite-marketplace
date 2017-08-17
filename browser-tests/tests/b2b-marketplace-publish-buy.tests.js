@@ -21,12 +21,12 @@ module.exports = {
 		};
 
 		browser
+
 			.getJSON(browser.globals.url_delete_test_cuts, function (response) {
 				console.log(`${response.deletedCount} documents deleted for test user`)
 			})
 			.url(browser.globals.url_publish)
 			.waitForElementVisible('.js-app', 1000)
-
 			.assert.elementNotPresent('[name="farm"]')
 			.login(testUser)
 			.waitForElementVisible('[name="farm"]', 1000)
@@ -89,6 +89,10 @@ module.exports = {
 
 			.log(`Confirm order`)
 			.click('.t-btn-confirm-order')
+			.waitForElementVisible('.t-order-purchase-resell', 1000)
+			.click('.t-radio-wholeOrPartCarcass-whole')
+			.click('.t-btn-confirm-order')
+
 			.waitForElementVisible('.t-order-confirmed', 1000)
 			.getText(`.t-order-total`, function (result) {
 				this.assert.equal(result.value, basketTotal);
@@ -107,7 +111,17 @@ module.exports = {
 			.waitForElementVisible('.js-app', 1000)
 			.click('.t-marketplace-admin-link')
 			.waitForElementVisible('.js-app', 1000)
+			.perform(function (client, done) {
+				done();
+			})
+			.deleteCookie('user')
+			.refresh()
 			.login(testUser)
+
+			.perform(function (client, done) {
+				client.waitForElementVisible(`.t-order-${orderId}`, 1000);
+				done();
+			})
 			.perform(function (client, done) {
 				client.click(`.t-order-${orderId}`);
 				done();
