@@ -4,7 +4,7 @@ module.exports = {
 		const breedId = 'dexter';
 		const liveWeightKg = 300;
 		const pricePerKg = 8.67;
-		const basketTotal = '£689.27';
+		const carcassPrice = '£689.27';
 		const eidTag = '123';
 		const testUser = 'test';
 		let orderId = '';
@@ -62,10 +62,10 @@ module.exports = {
 			.click('.t-checkbox-provenance-redTractor')
 			.assert.elementPresent(`.t-search-result-row-${farmId}`)
 			.getText(`.t-${farmId}-inventory`, function (result) {
-				this.assert.equal(parseInt(result.value, 10), 1);
+				this.assert.equal(parseInt(result.value, 10), 2);
 			})
 			.getText(`.t-${farmId}-price`, function (result) {
-				this.assert.equal(result.value, `£${pricePerKg}`);
+				this.assert.equal(result.value, carcassPrice);
 			})
 
 			.log(`Add the published cow to basket`)
@@ -77,25 +77,25 @@ module.exports = {
 			})
 			.click('.t-basket-summary-link')
 			.getText('.t-basket-total', function (result) {
-				this.assert.equal(result.value, basketTotal);
+				this.assert.equal(result.value, carcassPrice);
 			})
 
 			.log(`Go to checkout`)
 			.click('.t-btn-checkout')
 			.waitForElementVisible('.t-confirm-basket', 1000)
 			.getText('.t-confirm-basket .t-basket-total', function (result) {
-				this.assert.equal(result.value, basketTotal);
+				this.assert.equal(result.value, carcassPrice);
 			})
 
 			.log(`Confirm order`)
 			.click('.t-btn-confirm-order')
 			.waitForElementVisible('.t-order-purchase-resell', 1000)
-			.click('.t-radio-wholeOrPartCarcass-whole')
+			.click('.t-radio-keepWholeCut-carcass-yes')
 			.click('.t-btn-confirm-order')
 
 			.waitForElementVisible('.t-order-confirmed', 1000)
 			.getText(`.t-order-total`, function (result) {
-				this.assert.equal(result.value, basketTotal);
+				this.assert.equal(result.value, carcassPrice);
 			})
 			.getText(`.t-order-id`, function (result) {
 				orderId = result.value;
@@ -104,16 +104,15 @@ module.exports = {
 			.log(`Cow is no longer available in the marketplace`)
 			.click('.t-marketplace-home')
 			.waitForElementVisible('body', 1000)
-			.assert.elementNotPresent(`.t-search-result-row-${farmId}`)
+			.assert.elementPresent(`.t-search-result-row-${farmId}`)
+			.getText(`.t-${farmId}-inventory`, function (result) {
+				this.assert.equal(parseInt(result.value, 10), 1);
+			})
 
 			.log('Go to B2C admin')
 			.back()
-			.waitForElementVisible('.js-app', 1000)
 			.click('.t-marketplace-admin-link')
 			.waitForElementVisible('.js-app', 1000)
-			.perform(function (client, done) {
-				done();
-			})
 			.deleteCookie('user')
 			.refresh()
 			.login(testUser)
