@@ -90,7 +90,12 @@ module.exports = {
 			.log(`Confirm order`)
 			.click('.t-btn-confirm-order')
 			.waitForElementVisible('.t-order-purchase-resell', 1000)
-			.click('.t-radio-keepWholeCut-carcass-yes')
+			.click('.t-radio-keepWholeCut-carcass-no')
+			.setVal('[name="cutToAdd"]', 'Whole Forequarter')
+			.perform(function (client, done) {
+				done();
+			})
+			.waitForElementVisible('.t-republish-cut-hindquarter', 1000)
 			.click('.t-btn-confirm-order')
 
 			.waitForElementVisible('.t-order-confirmed', 1000)
